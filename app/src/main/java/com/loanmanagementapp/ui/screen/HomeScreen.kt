@@ -5,7 +5,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.loanmanagementapp.data.model.Loan
@@ -15,7 +14,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(repository: LoanRepository) {
-    val context = LocalContext.current
     var loans by remember { mutableStateOf(emptyList<Loan>()) }
     val coroutineScope = rememberCoroutineScope()
     Scaffold(
@@ -33,7 +31,7 @@ fun HomeScreen(repository: LoanRepository) {
             Button(onClick = {
                 if (loans.isEmpty())
                     coroutineScope.launch {
-                        loans = repository.updateLoans(context)
+                        loans = repository.updateLoans()
                     }
                 else
                     loans = emptyList()

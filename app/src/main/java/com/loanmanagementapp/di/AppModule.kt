@@ -1,5 +1,6 @@
 package com.loanmanagementapp.di
 
+import android.content.Context
 import com.loanmanagementapp.data.repository.LoanRepository
 import com.loanmanagementapp.data.repository.LoanService
 import com.loanmanagementapp.data.repository.MockLoanService
@@ -8,9 +9,11 @@ import com.loanmanagementapp.data.strategy.DueDateStrategy
 import com.loanmanagementapp.data.strategy.LoanStrategySelector
 import com.loanmanagementapp.data.strategy.LoanUpdateStrategy
 import com.loanmanagementapp.data.strategy.PaidLoanStrategy
+import com.loanmanagementapp.data.util.AssetLoader
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
@@ -20,7 +23,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideLoanService(): LoanService = MockLoanService()
+    fun provideLoanService(assetLoader: AssetLoader): LoanService = MockLoanService(assetLoader)
 
     @Provides
     @IntoSet
@@ -46,4 +49,10 @@ object AppModule {
         loanService: LoanService,
         strategySelector: LoanStrategySelector
     ): LoanRepository = LoanRepository(loanService, strategySelector)
+
+    @Provides
+    @Singleton
+    fun provideAssetLoader(@ApplicationContext context: Context): AssetLoader {
+        return AssetLoader(context)
+    }
 }

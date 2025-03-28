@@ -1,17 +1,19 @@
 package com.loanmanagementapp.data.repository
 
-import android.content.Context
 import com.loanmanagementapp.data.model.Loan
+import com.loanmanagementapp.data.util.AssetLoader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import java.io.IOException
 import javax.inject.Inject
 
-class MockLoanService @Inject constructor() : LoanService {
-    override suspend fun loadLoans(context: Context): List<Loan> = withContext(Dispatchers.IO) {
+class MockLoanService @Inject constructor(
+    private val assetLoader: AssetLoader
+) : LoanService {
+    override suspend fun loadLoans(): List<Loan> = withContext(Dispatchers.IO) {
         try {
-            val jsonString = context.assets.open("loans.json").bufferedReader().use { it.readText() }
+            val jsonString = assetLoader.loadJsonFromAssets("loans.json")
             val jsonArray = JSONArray(jsonString)
             val loans = mutableListOf<Loan>()
 
