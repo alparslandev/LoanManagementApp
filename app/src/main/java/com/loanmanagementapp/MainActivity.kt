@@ -9,7 +9,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.loanmanagementapp.data.repository.LoanRepository
 import com.loanmanagementapp.ui.screen.HomeScreen
-import com.loanmanagementapp.ui.screen.LoginScreen
+import com.loanmanagementapp.ui.screen.login.LoginScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
