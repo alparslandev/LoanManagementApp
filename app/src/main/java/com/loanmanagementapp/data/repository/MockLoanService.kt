@@ -1,6 +1,7 @@
-package com.loanmanagementapp.data
+package com.loanmanagementapp.data.repository
 
 import android.content.Context
+import com.loanmanagementapp.data.model.Loan
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONArray

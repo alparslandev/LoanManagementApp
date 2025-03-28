@@ -1,4 +1,4 @@
-package com.loanmanagementapp.data
+package com.loanmanagementapp.data.model
 
 data class Loan(
     val name: String,
