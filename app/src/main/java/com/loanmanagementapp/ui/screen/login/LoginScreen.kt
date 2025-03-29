@@ -23,15 +23,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.loanmanagementapp.ui.screen.UserInfoSharedViewModel
 
 @Composable
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
-    viewModel: LoginViewModel = hiltViewModel()
+    viewModel: LoginViewModel = hiltViewModel(),
+    sharedViewModel: UserInfoSharedViewModel = hiltViewModel()
 ) {
-    val username by viewModel.username.collectAsState()
     val password by viewModel.password.collectAsState()
     val snackbarHostState = remember { SnackbarHostState() }
+    val username by sharedViewModel.username.collectAsState()
 
     LaunchedEffect(Unit) {
         viewModel.loginSuccess.collect {
@@ -55,7 +57,7 @@ fun LoginScreen(
         ) {
             OutlinedTextField(
                 value = username,
-                onValueChange = viewModel::onUsernameChange,
+                onValueChange = sharedViewModel::setUsername,
                 label = { Text("Username") },
                 modifier = Modifier.fillMaxWidth()
             )

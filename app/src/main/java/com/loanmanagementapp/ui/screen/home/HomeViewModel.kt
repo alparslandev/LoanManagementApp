@@ -31,7 +31,6 @@ class HomeViewModel @Inject constructor(
         return String.format(Locale.getDefault(),"%.2f", interest)
     }
 
-
     fun calculateMonthlyPayment(loan: Loan): String {
         val monthlyRate = loan.interestRate / 12 / 100
         val result = if (loan.dueIn <= 0) 0.0 else {

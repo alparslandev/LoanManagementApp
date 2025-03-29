@@ -13,9 +13,6 @@ import kotlinx.coroutines.flow.StateFlow
 @HiltViewModel
 class LoginViewModel @Inject constructor() : ViewModel() {
 
-    private val _username = MutableStateFlow("")
-    val username: StateFlow<String> = _username
-
     private val _password = MutableStateFlow("")
     val password: StateFlow<String> = _password
 
@@ -25,17 +22,13 @@ class LoginViewModel @Inject constructor() : ViewModel() {
     private val _errorMessage = MutableSharedFlow<String>()
     val errorMessage = _errorMessage.asSharedFlow()
 
-    fun onUsernameChange(newUsername: String) {
-        _username.value = newUsername
-    }
-
     fun onPasswordChange(newPassword: String) {
         _password.value = newPassword
     }
 
     fun onLoginClick() {
         viewModelScope.launch { // ViewModel içinde coroutine başlatmak için güvenli bir scope.
-            if (_username.value.isBlank() || _password.value.isBlank()) {
+            if (_password.value.isBlank()) {
                 _errorMessage.emit("Kullanıcı adı ve şifre boş bırakılamaz.")
                 return@launch
             }

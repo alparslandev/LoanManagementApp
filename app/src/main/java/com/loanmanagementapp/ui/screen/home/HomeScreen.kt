@@ -12,18 +12,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.loanmanagementapp.data.model.Loan
 import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.Alignment
+import com.loanmanagementapp.ui.screen.UserInfoSharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = hiltViewModel()) {
+fun HomeScreen(
+    viewModel: HomeViewModel = hiltViewModel(),
+    sharedViewModel: UserInfoSharedViewModel = hiltViewModel()
+) {
+
+    val username by sharedViewModel.username.collectAsState()
     val loans by viewModel.loans.collectAsState()
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(Unit) { // Ekran açıldığında kredi verileri yüklensin diye
         viewModel.loadLoans()
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Loan Management") }) }
+        topBar = { TopAppBar(title = { Text("Username: $username") }) }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
@@ -72,7 +78,10 @@ fun LoanCard(loan: Loan, viewModel: HomeViewModel) {
                     Text("Principal: \$${loan.principalAmount}")
                     Text("Monthly Payment: \$${viewModel.calculateMonthlyPayment(loan)}")
                 }
-                Column(verticalArrangement = Arrangement.spacedBy(4.dp), horizontalAlignment = Alignment.End) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
                     Text("Due In: ${loan.dueIn} months")
                     Text("Total Interest: \$${viewModel.calculateTotalInterest(loan)}")
                     Text("Interest Rate: ${loan.interestRate}%")
