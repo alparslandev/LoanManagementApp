@@ -4,25 +4,21 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.loanmanagementapp.ui.components.common.CustomEditText
+import com.loanmanagementapp.ui.components.common.PrimaryButton
 import com.loanmanagementapp.ui.screen.UserInfoSharedViewModel
 
 @Composable
@@ -55,28 +51,25 @@ fun LoginScreen(
                 .padding(padding),
             verticalArrangement = Arrangement.Center
         ) {
-            OutlinedTextField(
+            CustomEditText(
                 value = username,
                 onValueChange = sharedViewModel::setUsername,
-                label = { Text("Username") },
-                modifier = Modifier.fillMaxWidth()
+                label = "Username"
             )
+
             Spacer(modifier = Modifier.height(10.dp))
-            OutlinedTextField(
+
+            CustomEditText(
                 value = password,
                 onValueChange = viewModel::onPasswordChange,
-                label = { Text("Password") },
-                visualTransformation = PasswordVisualTransformation(),
-                modifier = Modifier.fillMaxWidth()
+                label = "Password",
+                isPassword = true
             )
             Spacer(modifier = Modifier.height(20.dp))
-            Button(
-                onClick = viewModel::onLoginClick,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(8.dp)
-            ) {
-                Text("Login")
-            }
+            PrimaryButton(
+                text = "Login",
+                onClick = viewModel::onLoginClick
+            )
         }
     }
 }
