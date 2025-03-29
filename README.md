@@ -1,4 +1,12 @@
-# Loan Management App – Technical Refactor Report
+<table>
+<tr>
+<td>
+
+### Loan Management App – Technical Refactor Report
+
+This project is a complete architecture and design refactor of an Android loan tracking app.  
+From outdated architecture to Strategy Pattern, Compose best practices and modern DI with Hilt & KSP — everything was modernized for scalability and maintainability.
+
 
 ## 🚀 Project Setup & Compatibility Adjustments
 
@@ -10,6 +18,15 @@ Additionally, the project was using `kapt`, a legacy annotation processor. I mig
 
 Several IDE and build artifacts such as `.idea/`, `.gradle/`, `.DS_Store`, and build outputs were mistakenly tracked.  
 I updated the `.gitignore` file accordingly and removed these entries from version control.
+
+</td>
+<td>
+<img src="https://github.com/user-attachments/assets/73036786-7359-4dac-b670-94c5a6b56845" alt="Credit App" width="%61.8"/>
+</td>
+</tr>
+</table>
+
+
 
 ## 🧠 Strategy Pattern Implementation
 
@@ -76,4 +93,3 @@ This refactor improved:
 
 The app is now ready for **real-world scale** with modern Android standards:  
 **Jetpack Compose**, **Hilt**, and **KSP**.
-
