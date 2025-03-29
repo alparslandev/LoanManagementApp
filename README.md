@@ -14,11 +14,6 @@ The project initially referenced **Java 11**, but due to compatibility with **An
 
 Additionally, the project was using `kapt`, a legacy annotation processor. I migrated it to **KSP (Kotlin Symbol Processing)**, which is more efficient, future-proof, and better integrated with the Kotlin ecosystem, especially with Java 16+ restrictions on reflection and encapsulation.
 
-## 🧹 .gitignore Cleanup
-
-Several IDE and build artifacts such as `.idea/`, `.gradle/`, `.DS_Store`, and build outputs were mistakenly tracked.  
-I updated the `.gitignore` file accordingly and removed these entries from version control.
-
 </td>
 <td>
 <img src="https://github.com/user-attachments/assets/73036786-7359-4dac-b670-94c5a6b56845" alt="Credit App" width="%61.8"/>
@@ -26,7 +21,10 @@ I updated the `.gitignore` file accordingly and removed these entries from versi
 </tr>
 </table>
 
+## 🧹 .gitignore Cleanup
 
+Several IDE and build artifacts such as `.idea/`, `.gradle/`, `.DS_Store`, and build outputs were mistakenly tracked.  
+I updated the `.gitignore` file accordingly and removed these entries from version control.
 
 ## 🧠 Strategy Pattern Implementation
 
