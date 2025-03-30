@@ -1,6 +1,8 @@
 package com.loanmanagementapp.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import com.loanmanagementapp.data.preferences.UserPreferences
 import com.loanmanagementapp.data.repository.LoanRepository
 import com.loanmanagementapp.data.repository.LoanService
 import com.loanmanagementapp.data.repository.MockLoanService
@@ -55,4 +57,17 @@ object AppModule {
     fun provideAssetLoader(@ApplicationContext context: Context): AssetLoader {
         return AssetLoader(context)
     }
+
+    @Provides
+    @Singleton
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("loan_prefs", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserPreferences(sharedPreferences: SharedPreferences): UserPreferences {
+        return UserPreferences(sharedPreferences)
+    }
+
 }
