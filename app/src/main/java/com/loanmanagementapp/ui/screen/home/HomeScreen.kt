@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.foundation.lazy.items
+import com.loanmanagementapp.ui.components.common.PrimaryButton
 import com.loanmanagementapp.ui.components.loan.LoanCard
 import com.loanmanagementapp.ui.screen.UserInfoSharedViewModel
 
@@ -15,18 +16,32 @@ import com.loanmanagementapp.ui.screen.UserInfoSharedViewModel
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    sharedViewModel: UserInfoSharedViewModel = hiltViewModel()
+    sharedViewModel: UserInfoSharedViewModel = hiltViewModel(),
+    onLogout: () -> Unit
 ) {
-
     val username by sharedViewModel.username.collectAsState()
     val loans by viewModel.loans.collectAsState()
 
-    LaunchedEffect(Unit) { // Ekran açıldığında kredi verileri yüklensin diye
+    LaunchedEffect(Unit) {
         viewModel.loadLoans()
     }
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Username: $username") }) }
+        topBar = {
+            TopAppBar(
+                title = { Text("Username: $username") },
+                actions = {
+                    PrimaryButton(
+                        text = "Logout",
+                        onClick = {
+                            sharedViewModel.clearUser()
+                            onLogout()
+                        },
+                        modifier = Modifier.padding(end = 8.dp)
+                    )
+                }
+            )
+        }
     ) { padding ->
         LazyColumn(
             modifier = Modifier
