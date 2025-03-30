@@ -2,20 +2,20 @@
 <tr>
 <td>
 
-### Loan Management App – Technical Refactor Report
+# Loan Management App – Technical Refactor Report 
 
 This project is a complete architecture and design refactor of an Android loan tracking app.  
 From outdated architecture to Strategy Pattern, Compose best practices and modern DI with Hilt & KSP — everything was modernized for scalability and maintainability.
 
 ## 🚀 Project Setup & Compatibility Adjustments
-
+</br>
 The project initially referenced **Java 11**, but due to compatibility with **Android Gradle Plugin 8.0+** and **Kotlin 1.9+**, I upgraded the environment to **JDK 17**, which is required for modern Android development.
 
 Additionally, the project was using `kapt`, a legacy annotation processor. I migrated it to **KSP (Kotlin Symbol Processing)**, which is more efficient, future-proof, and better integrated with the Kotlin ecosystem, especially with Java 16+ restrictions on reflection and encapsulation.
 
 </td>
-<td>
-<img src="https://github.com/user-attachments/assets/73036786-7359-4dac-b670-94c5a6b56845" alt="Credit App" width="61.8%"/>
+<td align="right" width="25%">
+<img src="https://github.com/user-attachments/assets/73036786-7359-4dac-b670-94c5a6b56845" alt="Credit App"/>
 </td>
 </tr>
 </table>
