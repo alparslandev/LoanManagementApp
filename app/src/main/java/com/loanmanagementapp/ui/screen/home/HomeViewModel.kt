@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loanmanagementapp.data.model.Loan
 import com.loanmanagementapp.data.repository.BaseRepository
-import com.loanmanagementapp.data.repository.LoanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -22,7 +21,7 @@ class HomeViewModel @Inject constructor(
 
     fun loadLoans() {
         viewModelScope.launch {
-            val updatedLoans = loanRepository.updateLoans()
+            val updatedLoans = loanRepository.updateData()
             _loans.value = updatedLoans
         }
     }

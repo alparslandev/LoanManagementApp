@@ -9,7 +9,7 @@ class LoanRepository @Inject constructor(
     private val loanService: LoanService,
     private val strategySelector: LoanStrategySelector
 ) : BaseRepository {
-    override suspend fun updateLoans(): List<Loan> {
+    override suspend fun updateData(): List<Loan> {
         val loans = loanService.loadLoans()
 
         for (loan in loans) {
