@@ -3,6 +3,7 @@ package com.loanmanagementapp.ui.screen.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.loanmanagementapp.data.model.Loan
+import com.loanmanagementapp.data.repository.BaseRepository
 import com.loanmanagementapp.data.repository.LoanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -13,7 +14,7 @@ import kotlin.math.pow
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val loanRepository: LoanRepository
+    private val loanRepository: BaseRepository
 ) : ViewModel() {
 
     private val _loans = MutableStateFlow<List<Loan>>(emptyList())

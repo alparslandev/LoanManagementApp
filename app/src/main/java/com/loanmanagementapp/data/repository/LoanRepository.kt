@@ -8,8 +8,8 @@ import javax.inject.Inject
 class LoanRepository @Inject constructor(
     private val loanService: LoanService,
     private val strategySelector: LoanStrategySelector
-) {
-    suspend fun updateLoans(): List<Loan> {
+) : BaseRepository {
+    override suspend fun updateLoans(): List<Loan> {
         val loans = loanService.loadLoans()
 
         for (loan in loans) {

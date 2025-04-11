@@ -3,6 +3,7 @@ package com.loanmanagementapp.di
 import android.content.Context
 import android.content.SharedPreferences
 import com.loanmanagementapp.data.preferences.UserPreferences
+import com.loanmanagementapp.data.repository.BaseRepository
 import com.loanmanagementapp.data.repository.LoanRepository
 import com.loanmanagementapp.data.repository.LoanService
 import com.loanmanagementapp.data.repository.MockLoanService
@@ -69,5 +70,12 @@ object AppModule {
     fun provideUserPreferences(sharedPreferences: SharedPreferences): UserPreferences {
         return UserPreferences(sharedPreferences)
     }
+
+    @Provides
+    @Singleton
+    fun provideBaseRepository(
+        loanService: LoanService,
+        strategySelector: LoanStrategySelector
+    ): BaseRepository = LoanRepository(loanService, strategySelector)
 
 }
