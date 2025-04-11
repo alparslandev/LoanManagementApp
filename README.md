@@ -9,9 +9,9 @@ From outdated architecture to Strategy Pattern, Compose best practices and moder
 
 ## 🚀 Project Setup & Compatibility Adjustments
 </br>
-The project initially referenced **Java 11**, but due to compatibility with **Android Gradle Plugin 8.0+** and **Kotlin 1.9+**, I upgraded the environment to **JDK 17**, which is required for modern Android development.
+The project initially referenced Java 11, but due to compatibility with Android Gradle Plugin 8.0+ and Kotlin 1.9+, I upgraded the environment to JDK 17, which is required for modern Android development.
 
-Additionally, the project was using `kapt`, a legacy annotation processor. I migrated it to **KSP (Kotlin Symbol Processing)**, which is more efficient, future-proof, and better integrated with the Kotlin ecosystem, especially with Java 16+ restrictions on reflection and encapsulation.
+Additionally, the project was using `kapt`, a legacy annotation processor. I migrated it to KSP (Kotlin Symbol Processing), which is more efficient, future-proof, and better integrated with the Kotlin ecosystem, especially with Java 16+ restrictions on reflection and encapsulation.
 
 </td>
 <td align="right" width="25%">
@@ -33,12 +33,12 @@ I updated the `.gitignore` file accordingly and removed these entries from versi
 
 The original code handled loan status updates using nested `if-else` blocks. These were hard to read and harder to extend.
 
-I introduced the **Strategy Design Pattern** to encapsulate each loan rule in a separate class:
+I introduced the Strategy Design Pattern to encapsulate each loan rule in a separate class:
 - `DueDateStrategy`
 - `PaidLoanStrategy`
 - `DefaultLoanStrategy`
 
-Each strategy is injected via **Hilt’s multibinding** and selected dynamically via a `LoanStrategySelector`.
+Each strategy is injected via Hilt’s multibinding and selected dynamically via a `LoanStrategySelector`.
 
 ---
 
@@ -69,11 +69,11 @@ To make the UI scalable and testable, I introduced ViewModels:
 
 UI components were modularized and extracted:
 - `LoanCard`, `LoanHeader`, and `LoanDetailsSection` under `ui.components.loan`
-- **Newly added:**
+- Newly added:
   - `CustomEditText` – reusable text input with optional password toggle
   - `PrimaryButton` – reusable button for consistent styling
 
-This promotes **code reuse** and aligns with **Component-Based Design** requested in the task.
+This promotes code reuse and aligns with Component-Based Design requested in the task.
 
 ---
 
@@ -81,15 +81,15 @@ This promotes **code reuse** and aligns with **Component-Based Design** requeste
 
 Removed unclear or unnecessary functions (e.g. repeating math operations pointlessly).  
 Added real-world financial calculations:
-- **Total interest**: `principal × rate`
-- **Monthly payment**: amortization formula  
-Results are formatted to **two decimal places**.
+- Total interest: `principal × rate`
+- Monthly payment: amortization formula  
+Results are formatted to two decimal places.
 
 ---
 
 ## 🔐 User Session Persistence
 
-Login state and username are now persisted using **SharedPreferences**, injected using Hilt.  
+Login state and username are now persisted using SharedPreferences, injected using Hilt.  
 - Username is restored from storage on app restart
 - `Logout` button clears session and returns to login
 - Session sharing is handled with `UserInfoSharedViewModel`
@@ -98,7 +98,7 @@ Login state and username are now persisted using **SharedPreferences**, injected
 
 ## 🖼️ Enhanced UX/UI
 
-Loans are displayed as **color-coded cards**:
+Loans are displayed as color-coded cards:
 - Red → `overdue`
 - Yellow → `default`
 - Green → `paid`
@@ -108,15 +108,32 @@ The design reflects loan status at a glance, improving usability.
 
 ---
 
+## 🧪 Repository Pattern
+To support testability, maintainability, and separation of concerns, I implemented the Repository Design Pattern:
+
+- LoanRepository acts as the single source of truth for loan data and encapsulates all data access logic.
+- A BaseRepository interface was introduced to abstract this data layer, allowing inversion of control and easy mocking.
+
+---
+
+## 🧪 Unit Testing & Base Abstractions
+
+To ensure reliability and testability:
+- Created `HomeViewModelTest` using `kotlinx-coroutines-test`  
+- Mocked the data layer with a `FakeLoanRepository`
+- ViewModel logic tested with `runTest` and verified using assertions
+
+---
+
 ## ✅ Summary
 
 This refactor improved:
 
-- **Architecture**: Clean MVVM + Strategy Pattern
-- **Maintainability**: Easier to test, extend, debug
-- **Reusability**: Shared ViewModels, components, strategy-based logic
-- **User Experience**: Informative, intuitive, visually responsive
-- **Persistence**: Login is remembered across launches
+- Architecture: Clean MVVM + Strategy Pattern
+- Maintainability: Easier to test, extend, debug
+- Reusability: Shared ViewModels, components, strategy-based logic
+- User Experience: Informative, intuitive, visually responsive
+- Persistence: Login is remembered across launches
 
-The app is now ready for **real-world scalability** with modern Android architecture:  
-**Jetpack Compose**, **Hilt**, **KSP**, and **SharedPreferences**.
+The app is now ready for real-world scalability with modern Android architecture:  
+Jetpack Compose, Hilt, KSP, and SharedPreferences.
